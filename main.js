@@ -83,25 +83,31 @@ function phaseThreeBasic() {
         })
     } else if (count == choiceAmt) {
         console.log("All questions have been made!")
-        for (var i = 0; i < choiceAmt; i++) {
-            inquirer.prompt([
-            {
-                name: "Question",
-                message: questions[i],
-                type: "input"
-                }
-            ]).then(function(test) {
-                if (process.argv[2] === answers[i]) {
-                    console.log("Correct!");
-                }
-            });
-        } // for loop ends here
+        basicCardInit();
     }
-
 }
 // }
 // }
 // }
+function basicCardInit() {
+    for (var i = 0; i < choiceAmt;i++) {
+        console.log("Question: "+questions[i]);
+                inquirer.prompt([{
+            name: "answerHere",
+            type: "input",
+            message: "What's the answer?"
+        }]).then(function(answerBasic) {
+            console.log(answerBasic.answerHere);
+            console.log(answers[i]);
+            if (answerBasic.answerHere === answers[i]) {
+                console.log("Correct!");
+            }
+            else {
+                console.log("Incorrect!");
+            }
+        })
+    }
+}
 
 function phaseThreeCloze() {
 
