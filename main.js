@@ -84,21 +84,16 @@ function phaseThreeBasic() {
     } else if (count == choiceAmt) {
         console.log("All questions have been made!")
         for (var i = 0; i < choiceAmt; i++) {
-            inquirer.prompt([{
+            inquirer.prompt([
+            {
                 name: "Question",
                 message: questions[i],
-                type: "input",
-                validate: function(value) {
-                    if (answers[i] === value) {
-                        console.log("Correct!");
-                        return true;
-                    }
-                    else {
-                        console.log("Incorrect!")
-                    }
+                type: "input"
                 }
-            }]).then(function() {
-                console.log("whatever")
+            ]).then(function(test) {
+                if (process.argv[2] === answers[i]) {
+                    console.log("Correct!");
+                }
             });
         } // for loop ends here
     }
