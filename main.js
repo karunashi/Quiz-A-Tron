@@ -1,7 +1,10 @@
 var inquirer = require("inquirer");
 var choiceAmt = 0;
 var count = 0;
+var game = 0;
+var score = 0;
 var questions = [];
+var questions2 = [];
 var answers = [];
 phaseOne();
 
@@ -10,18 +13,12 @@ function BasicCard(front, back) {
     this.back = back;
 };
 
-function ClozeCard(text, cloze) {
-    this.text = text;
-    this.cloze = cloze;
+function ClozeCard(questionCloze, answer) {
+    this.questionCloze = questionCloze;
+    this.answer = answer;
+
 };
 
-// ClozeCard.prototype.printInfo = function() {
-//   console.log("Name: " + this.name + "\nPosition: " + this.position + "\nAge: " +
-//   this.age + "\nLanguages: " + this.language);
-// };
-
-// runs inquirer and asks the user a series of questions whose replies are
-// stored within the variable answers inside of the .then statement.
 function phaseOne() {
     inquirer.prompt([{
 
@@ -36,7 +33,6 @@ function phaseOne() {
         }
     }]).then(function(initialPhase) {
         choiceAmt = initialPhase.howMany;
-        console.log(choiceAmt);
         phaseTwo();
     });
 }
@@ -86,29 +82,102 @@ function phaseThreeBasic() {
         basicCardInit();
     }
 }
-// }
-// }
-// }
+
 function basicCardInit() {
-    for (var i = 0; i < choiceAmt;i++) {
-        console.log("Question: "+questions[i]);
-                inquirer.prompt([{
+        if (game < choiceAmt) {
+        inquirer.prompt([{
             name: "answerHere",
             type: "input",
-            message: "What's the answer?"
+            message: questions[game]
         }]).then(function(answerBasic) {
-            console.log(answerBasic.answerHere);
-            console.log(answers[i]);
-            if (answerBasic.answerHere === answers[i]) {
-                console.log("Correct!");
+            // console.log(answerBasic.answerHere);
+            // console.log(answers[game]);
+            if (answerBasic.answerHere === answers[game]) {
+                console.log("Correct!"+ "\n" + "The answer is: " + answers[game]);
+                score++;
+            }
+            else {
+                console.log("Incorrect!"+ "\n" + "The answer is: " + answers[game]);
+            }
+        game++;
+        basicCardInit();
+        });
+    }
+        else { 
+console.log("You got " +score+ " out of " +count+ " correct!")
+console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▐▄▒▒▒▌▌▒▒▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌▒▐"+'\x1b[0m\x1b[5m'+"▐"+'\x1b[46m'+"▐▒▒▐▒▒▌▒▀▄▀▄"+'\x1b[0m\x1b[5m'+"░")
+console.log('\x1b[5m'+"░░░"+'\x1b[46m'+"█▐▒▒▀▀▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▄▌▌▐▒▒▒▌▐"+'\x1b[0m\x1b[5m'+"░")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▒▀▀▄▐"+'\x1b[0m\x1b[5m'+"░▀▀▄▄░░░░░░░░░░░"+'\x1b[46m'+"▐▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌"+'\x1b[0m\x1b[5m'+"")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▌▒▒▒▌"+'\x1b[0m\x1b[5m'+"░▄▄▄▄█▄░░░░░░░▄▄▄"+'\x1b[46m'+"▐▐▄▄▀"+'\x1b[0m\x1b[5m'+"░░")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▌▐▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░░░░░░░▀█▄░░░░▌▌░░░")
+console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░░░░▀▀░░▌▌░░░")
+console.log('\x1b[5m'+""+'\x1b[46m'+"▄▄▀▒▐▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▐▀▀▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░░░░░▌▌░░░")
+console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▌▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░░▐▐▒▀▀▄")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▄▀▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░▄█▄▒▐▒▒▒")
+console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▒▒▒▄██▀▄▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░▄▄▀█▄░█▀▒▒▒▒"+'\x1b[0m')
+}
+}
+
+function phaseThreeCloze() {
+    if (count < choiceAmt) {
+        inquirer.prompt([{
+            name: "clozeQuestion",
+            type: "input",
+            message: "Please input the entire statement which includes the question and the answer in one argument."
+        }, {
+            name: "clozePortion",
+            type: "input",
+            message: "Please input the answer to the statement that will be partitioned for flashcard generation."
+        }]).then(function(cloze) {
+            var ClozeQues = new ClozeCard(cloze.clozeQuestion, cloze.clozePortion);
+            questions2.push(cloze.clozeQuestion);
+            count++;
+            var a = cloze.clozeQuestion.replace(cloze.clozePortion, "...")
+            questions.push(a);
+            answers.push(cloze.clozePortion);
+
+            console.log(questions);
+            console.log("================")
+            console.log("================")
+            console.log("================")
+            console.log(answers);
+            phaseThreeCloze();
+        })
+    } else if (count == choiceAmt) {
+        console.log("All questions have been made!")
+        clozeCardInit();
+    }
+}
+
+function clozeCardInit() {
+    if (game < choiceAmt) {
+        inquirer.prompt([{
+            name: "answerCl",
+            type: "input",
+            message: questions[game]
+        }]).then(function(answerCloze) {
+            if (answerCloze.answerCl === answers[game]) {
+                console.log("Correct!" + "\n" + "The answer is: " + questions2[game]);
+                score++;
             }
             else {
                 console.log("Incorrect!");
             }
-        })
+        game++;
+        clozeCardInit();
+        });
     }
+    else { 
+console.log("You got " +score+ " out of " +count+ " correct!")
+console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▐▄▒▒▒▌▌▒▒▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌▒▐"+'\x1b[0m\x1b[5m'+"▐"+'\x1b[46m'+"▐▒▒▐▒▒▌▒▀▄▀▄"+'\x1b[0m\x1b[5m'+"░")
+console.log('\x1b[5m'+"░░░"+'\x1b[46m'+"█▐▒▒▀▀▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▄▌▌▐▒▒▒▌▐"+'\x1b[0m\x1b[5m'+"░")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▒▀▀▄▐"+'\x1b[0m\x1b[5m'+"░▀▀▄▄░░░░░░░░░░░"+'\x1b[46m'+"▐▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌"+'\x1b[0m\x1b[5m'+"")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▌▒▒▒▌"+'\x1b[0m\x1b[5m'+"░▄▄▄▄█▄░░░░░░░▄▄▄"+'\x1b[46m'+"▐▐▄▄▀"+'\x1b[0m\x1b[5m'+"░░")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▌▐▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░░░░░░░▀█▄░░░░▌▌░░░")
+console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░░░░▀▀░░▌▌░░░")
+console.log('\x1b[5m'+""+'\x1b[46m'+"▄▄▀▒▐▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▐▀▀▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░░░░░▌▌░░░")
+console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▌▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░░▐▐▒▀▀▄")
+console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▄▀▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░▄█▄▒▐▒▒▒")
+console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▒▒▒▄██▀▄▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░▄▄▀█▄░█▀▒▒▒▒"+'\x1b[0m')
 }
-
-function phaseThreeCloze() {
-
 }
