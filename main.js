@@ -45,7 +45,6 @@ function phaseTwo() {
         choices: ["Basic", "Cloze"]
     }]).then(function(setupPhase) {
         console.log(setupPhase.whatType + " chosen. Intializing. . .");
-        console.log(choiceAmt) //Check - Delete later
         if (setupPhase.whatType === "Basic") {
             phaseThreeBasic();
         } else if (setupPhase.whatType === "Cloze") {
@@ -84,38 +83,34 @@ function phaseThreeBasic() {
 }
 
 function basicCardInit() {
-        if (game < choiceAmt) {
+    if (game < choiceAmt) {
         inquirer.prompt([{
             name: "answerHere",
             type: "input",
             message: questions[game]
         }]).then(function(answerBasic) {
-            // console.log(answerBasic.answerHere);
-            // console.log(answers[game]);
             if (answerBasic.answerHere === answers[game]) {
-                console.log("Correct!"+ "\n" + "The answer is: " + answers[game]);
+                console.log("Correct!" + "\n" + "The answer is: " + answers[game]);
                 score++;
+            } else {
+                console.log("Incorrect!" + "\n" + "The answer is: " + answers[game]);
             }
-            else {
-                console.log("Incorrect!"+ "\n" + "The answer is: " + answers[game]);
-            }
-        game++;
-        basicCardInit();
+            game++;
+            basicCardInit();
         });
+    } else {
+        console.log("You got " + score + " out of " + count + " correct!")
+        console.log('\x1b[5m' + "░░░░" + '\x1b[46m' + "█▐▄▒▒▒▌▌▒▒▌" + '\x1b[0m\x1b[5m' + "░" + '\x1b[46m' + "▌▒▐" + '\x1b[0m\x1b[5m' + "▐" + '\x1b[46m' + "▐▒▒▐▒▒▌▒▀▄▀▄" + '\x1b[0m\x1b[5m' + "░")
+        console.log('\x1b[5m' + "░░░" + '\x1b[46m' + "█▐▒▒▀▀▌" + '\x1b[0m\x1b[5m' + "░" + '\x1b[46m' + "▀▀▀" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[46m' + "▀▀▀" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[46m' + "▀▀▄▌▌▐▒▒▒▌▐" + '\x1b[0m\x1b[5m' + "░")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▐▒▒▀▀▄▐" + '\x1b[0m\x1b[5m' + "░▀▀▄▄░░░░░░░░░░░" + '\x1b[46m' + "▐▒▌▒▒▐" + '\x1b[0m\x1b[5m' + "░" + '\x1b[46m' + "▌" + '\x1b[0m\x1b[5m' + "")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▐▒▌▒▒▒▌" + '\x1b[0m\x1b[5m' + "░▄▄▄▄█▄░░░░░░░▄▄▄" + '\x1b[46m' + "▐▐▄▄▀" + '\x1b[0m\x1b[5m' + "░░")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▌▐▒▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░░░░░░░░░▀█▄░░░░▌▌░░░")
+        console.log('\x1b[5m' + "" + '\x1b[46m' + "▄▀▒▒▌▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░░░" + '\x1b[31m' + "▄" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[31m' + "▄" + '\x1b[0m\x1b[5m' + "░░░░░▀▀░░▌▌░░░")
+        console.log('\x1b[5m' + "" + '\x1b[46m' + "▄▄▀▒▐▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░░░" + '\x1b[31m' + "▐▀▀▀▄▄▀" + '\x1b[0m\x1b[5m' + "░░░░░░▌▌░░░")
+        console.log('\x1b[5m' + "░░░░" + '\x1b[46m' + "█▌▒▒▌" + '\x1b[0m\x1b[5m' + "░░░░░" + '\x1b[31m' + "▐▒▒▒▒▒▌" + '\x1b[0m\x1b[5m' + "░░░░░░▐▐▒▀▀▄")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▄▀▒▒▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░" + '\x1b[31m' + "▐▒▒▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░▄█▄▒▐▒▒▒")
+        console.log('\x1b[5m' + "" + '\x1b[46m' + "▄▀▒▒▒▒▒▄██▀▄▄" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[31m' + "▀▄▄▀" + '\x1b[0m\x1b[5m' + "░░▄▄▀█▄░█▀▒▒▒▒" + '\x1b[0m')
     }
-        else { 
-console.log("You got " +score+ " out of " +count+ " correct!")
-console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▐▄▒▒▒▌▌▒▒▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌▒▐"+'\x1b[0m\x1b[5m'+"▐"+'\x1b[46m'+"▐▒▒▐▒▒▌▒▀▄▀▄"+'\x1b[0m\x1b[5m'+"░")
-console.log('\x1b[5m'+"░░░"+'\x1b[46m'+"█▐▒▒▀▀▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▄▌▌▐▒▒▒▌▐"+'\x1b[0m\x1b[5m'+"░")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▒▀▀▄▐"+'\x1b[0m\x1b[5m'+"░▀▀▄▄░░░░░░░░░░░"+'\x1b[46m'+"▐▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌"+'\x1b[0m\x1b[5m'+"")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▌▒▒▒▌"+'\x1b[0m\x1b[5m'+"░▄▄▄▄█▄░░░░░░░▄▄▄"+'\x1b[46m'+"▐▐▄▄▀"+'\x1b[0m\x1b[5m'+"░░")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▌▐▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░░░░░░░▀█▄░░░░▌▌░░░")
-console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░░░░▀▀░░▌▌░░░")
-console.log('\x1b[5m'+""+'\x1b[46m'+"▄▄▀▒▐▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▐▀▀▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░░░░░▌▌░░░")
-console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▌▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░░▐▐▒▀▀▄")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▄▀▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░▄█▄▒▐▒▒▒")
-console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▒▒▒▄██▀▄▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░▄▄▀█▄░█▀▒▒▒▒"+'\x1b[0m')
-}
 }
 
 function phaseThreeCloze() {
@@ -159,25 +154,23 @@ function clozeCardInit() {
             if (answerCloze.answerCl === answers[game]) {
                 console.log("Correct!" + "\n" + "The answer is: " + questions2[game]);
                 score++;
-            }
-            else {
+            } else {
                 console.log("Incorrect!");
             }
-        game++;
-        clozeCardInit();
+            game++;
+            clozeCardInit();
         });
+    } else {
+        console.log("You got " + score + " out of " + count + " correct!")
+        console.log('\x1b[5m' + "░░░░" + '\x1b[46m' + "█▐▄▒▒▒▌▌▒▒▌" + '\x1b[0m\x1b[5m' + "░" + '\x1b[46m' + "▌▒▐" + '\x1b[0m\x1b[5m' + "▐" + '\x1b[46m' + "▐▒▒▐▒▒▌▒▀▄▀▄" + '\x1b[0m\x1b[5m' + "░")
+        console.log('\x1b[5m' + "░░░" + '\x1b[46m' + "█▐▒▒▀▀▌" + '\x1b[0m\x1b[5m' + "░" + '\x1b[46m' + "▀▀▀" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[46m' + "▀▀▀" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[46m' + "▀▀▄▌▌▐▒▒▒▌▐" + '\x1b[0m\x1b[5m' + "░")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▐▒▒▀▀▄▐" + '\x1b[0m\x1b[5m' + "░▀▀▄▄░░░░░░░░░░░" + '\x1b[46m' + "▐▒▌▒▒▐" + '\x1b[0m\x1b[5m' + "░" + '\x1b[46m' + "▌" + '\x1b[0m\x1b[5m' + "")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▐▒▌▒▒▒▌" + '\x1b[0m\x1b[5m' + "░▄▄▄▄█▄░░░░░░░▄▄▄" + '\x1b[46m' + "▐▐▄▄▀" + '\x1b[0m\x1b[5m' + "░░")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▌▐▒▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░░░░░░░░░▀█▄░░░░▌▌░░░")
+        console.log('\x1b[5m' + "" + '\x1b[46m' + "▄▀▒▒▌▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░░░" + '\x1b[31m' + "▄" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[31m' + "▄" + '\x1b[0m\x1b[5m' + "░░░░░▀▀░░▌▌░░░")
+        console.log('\x1b[5m' + "" + '\x1b[46m' + "▄▄▀▒▐▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░░░" + '\x1b[31m' + "▐▀▀▀▄▄▀" + '\x1b[0m\x1b[5m' + "░░░░░░▌▌░░░")
+        console.log('\x1b[5m' + "░░░░" + '\x1b[46m' + "█▌▒▒▌" + '\x1b[0m\x1b[5m' + "░░░░░" + '\x1b[31m' + "▐▒▒▒▒▒▌" + '\x1b[0m\x1b[5m' + "░░░░░░▐▐▒▀▀▄")
+        console.log('\x1b[5m' + "░░" + '\x1b[46m' + "▄▀▒▒▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░" + '\x1b[31m' + "▐▒▒▒▒▐" + '\x1b[0m\x1b[5m' + "░░░░░▄█▄▒▐▒▒▒")
+        console.log('\x1b[5m' + "" + '\x1b[46m' + "▄▀▒▒▒▒▒▄██▀▄▄" + '\x1b[0m\x1b[5m' + "░░" + '\x1b[31m' + "▀▄▄▀" + '\x1b[0m\x1b[5m' + "░░▄▄▀█▄░█▀▒▒▒▒" + '\x1b[0m')
     }
-    else { 
-console.log("You got " +score+ " out of " +count+ " correct!")
-console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▐▄▒▒▒▌▌▒▒▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌▒▐"+'\x1b[0m\x1b[5m'+"▐"+'\x1b[46m'+"▐▒▒▐▒▒▌▒▀▄▀▄"+'\x1b[0m\x1b[5m'+"░")
-console.log('\x1b[5m'+"░░░"+'\x1b[46m'+"█▐▒▒▀▀▌"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▀"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[46m'+"▀▀▄▌▌▐▒▒▒▌▐"+'\x1b[0m\x1b[5m'+"░")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▒▀▀▄▐"+'\x1b[0m\x1b[5m'+"░▀▀▄▄░░░░░░░░░░░"+'\x1b[46m'+"▐▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░"+'\x1b[46m'+"▌"+'\x1b[0m\x1b[5m'+"")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▐▒▌▒▒▒▌"+'\x1b[0m\x1b[5m'+"░▄▄▄▄█▄░░░░░░░▄▄▄"+'\x1b[46m'+"▐▐▄▄▀"+'\x1b[0m\x1b[5m'+"░░")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▌▐▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░░░░░░░▀█▄░░░░▌▌░░░")
-console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▌▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▄"+'\x1b[0m\x1b[5m'+"░░░░░▀▀░░▌▌░░░")
-console.log('\x1b[5m'+""+'\x1b[46m'+"▄▄▀▒▐▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░░░"+'\x1b[31m'+"▐▀▀▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░░░░░▌▌░░░")
-console.log('\x1b[5m'+"░░░░"+'\x1b[46m'+"█▌▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▒▌"+'\x1b[0m\x1b[5m'+"░░░░░░▐▐▒▀▀▄")
-console.log('\x1b[5m'+"░░"+'\x1b[46m'+"▄▀▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░"+'\x1b[31m'+"▐▒▒▒▒▐"+'\x1b[0m\x1b[5m'+"░░░░░▄█▄▒▐▒▒▒")
-console.log('\x1b[5m'+""+'\x1b[46m'+"▄▀▒▒▒▒▒▄██▀▄▄"+'\x1b[0m\x1b[5m'+"░░"+'\x1b[31m'+"▀▄▄▀"+'\x1b[0m\x1b[5m'+"░░▄▄▀█▄░█▀▒▒▒▒"+'\x1b[0m')
-}
 }
