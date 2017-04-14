@@ -1,0 +1,30 @@
+{
+  "name": "flashcard_generator_main",
+  "version": "1.33.7",
+  "description": "Make yourself flashcards via CLI",
+  "main": "main.js",
+  "dependencies": {
+    "inquirer": "^3.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karunashi/Flashcard_Generator.git"
+  },
+  "keywords": [
+    "flashcards",
+    "flashcard",
+    "basic",
+    "cloze",
+    "quiz"
+  ],
+  "author": "karunashi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karunashi/Flashcard_Generator/issues"
+  },
+  "homepage": "https://github.com/karunashi/Flashcard_Generator#readme"
+}
